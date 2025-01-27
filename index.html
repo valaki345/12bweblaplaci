@@ -12,6 +12,7 @@
             color: #333;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
 
         header {
@@ -19,21 +20,26 @@
             color: white;
             text-align: center;
             padding: 20px;
+            animation: fadeIn 1s ease-out;
         }
 
         h1 {
             font-size: 2.5em;
             margin: 0;
+            animation: slideIn 1s ease-out;
         }
 
         h2 {
             font-size: 1.8em;
             margin-top: 0;
+            animation: slideIn 1.5s ease-out;
         }
 
         .content {
             padding: 20px;
             text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease-out 0.5s forwards;
         }
 
         /* Kép stílus */
@@ -42,6 +48,12 @@
             height: auto;
             border-radius: 10px;
             margin: 20px 0;
+            transform: scale(1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .image:hover {
+            transform: scale(1.05);
         }
 
         /* Színes gomb */
@@ -52,10 +64,14 @@
             text-decoration: none;
             border-radius: 5px;
             font-size: 1.2em;
+            display: inline-block;
+            margin-top: 20px;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease;
         }
 
         .button:hover {
             background-color: #e5533d;
+            transform: translateY(-5px);
         }
 
         /* Részletes leírás szakasz */
@@ -68,6 +84,8 @@
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 2s ease-out 1s forwards;
         }
 
         /* Beszámoló szakasz */
@@ -81,6 +99,8 @@
             margin-left: auto;
             margin-right: auto;
             font-size: 1.1em;
+            opacity: 0;
+            animation: fadeIn 2s ease-out 1.5s forwards;
         }
 
         .report h3 {
@@ -97,17 +117,72 @@
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 2s ease-out 2s forwards;
         }
 
         .full-content h3 {
             color: #2c3e50;
             font-size: 2em;
+            text-align: center;
         }
 
         .full-content p {
             line-height: 1.8;
             font-size: 1.1em;
             color: #555;
+            text-align: justify;
+        }
+
+        /* Animációk */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-50px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Táblázat stílus */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-out 2.5s forwards;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.2em;
+        }
+
+        td {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -126,6 +201,47 @@
         </div>
     </div>
 
+    <!-- Kedvenc tantárgyak táblázata -->
+    <div class="full-content">
+        <h3>Kedvenc Tantárgyak</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tantárgy</th>
+                    <th>Oktató</th>
+                    <th>Órák száma/hét</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Matematika</td>
+                    <td>Dr. Kovács Ádám</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>Fizika</td>
+                    <td>Dr. Szilágyi Péter</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>Informatika</td>
+                    <td>Dr. Nagy Mária</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>Kémia</td>
+                    <td>Dr. Tóth Tamás</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>Angol</td>
+                    <td>Dr. Kiss Eszter</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <!-- Beszámoló szakasz -->
     <div class="report">
         <h3>Beszámoló a projekt előrehaladásáról</h3>
@@ -135,23 +251,7 @@
         <p>Jelenleg az oldal elérhető, és folyamatosan frissül. A projekt célja, hogy bemutassa, hogyan lehet egyszerű HTML és CSS segítségével egy szép, funkcionális weboldalt létrehozni, amely bármilyen célra felhasználható.</p>
     </div>
 
-    <!-- Tartalom szakasz -->
-    <div class="full-content">
-        <h3>Projekt bemutatása</h3>
-        <p>A projekt célja, hogy megmutassa a HTML és CSS alapú weboldal készítés egyszerűségének és hatékonyságának előnyeit. A csapat különös figyelmet fordított a felhasználói élményre, a vizuális megjelenésre és az oldal reszponzivitására, hogy minden eszközön tökéletesen működjön.</p>
-        <p>Az oldal létrehozása során figyelembe vettük a modern webdesign trendeket, mint például a letisztult dizájn, színek és képek megfelelő használata. Célunk az volt, hogy a weboldal egyszerű legyen, de közben vonzó is. A felhasználói élmény javítása érdekében a navigációt intuitív módon alakítottuk ki.</p>
-        
-        <h3>Fejlesztési fázisok</h3>
-        <p>A fejlesztés három fő fázisra volt felosztva:</p>
-        <ul>
-            <li><strong>Első fázis</strong>: A weboldal alapstruktúrájának és dizájnjának megtervezése.</li>
-            <li><strong>Második fázis</strong>: HTML és CSS kódolás, első tesztelés és módosítások.</li>
-            <li><strong>Harmadik fázis</strong>: Reszponzivitás biztosítása, optimalizálás mobil és tablet eszközökre, végső finomhangolás.</li>
-        </ul>
-        
-        <h3>Miért fontos ez a projekt?</h3>
-        <p>Ez a projekt lehetőséget ad arra, hogy megismerkedjünk a webfejlesztés alapjaival, és megtanuljuk, hogyan alkalmazzuk a dizájn és technológiai szabványokat egy valódi weboldalon. A HTML és CSS nyújtotta szabadság lehetővé tette, hogy szabadon formáljuk az oldalt, miközben a felhasználói élmény és a dizájn harmóniájára is ügyeltünk.</p>
-    </div>
 </body>
 </html>
+
 
